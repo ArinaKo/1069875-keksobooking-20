@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Арина Коваленко](https://up.htmlacademy.ru/javascript/20/user/1069875).
-* Наставник: `Неизвестно`.
+* Наставник: [Кексобот].
 
 ---
 
