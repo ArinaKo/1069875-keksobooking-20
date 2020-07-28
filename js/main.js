@@ -20,6 +20,17 @@ var limitOfPin = {
   maxY: 630
 };
 
+var map = document.querySelector('.map');
+var adForm = document.querySelector('.ad-form');
+var adAddress = document.querySelector('#address');
+var adRooms = document.querySelector('#room_number');
+var adCapacity = document.querySelector('#capacity');
+var mainPin = document.querySelector('.map__pin--main');
+var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+var fieldsets = document.querySelectorAll('fieldset');
+var selects = document.querySelectorAll('select');
+
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -74,8 +85,6 @@ var getSimilarAds = function () {
   return ads;
 };
 
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-
 var createPin = function (info) {
   var pin = pinTemplate.cloneNode(true);
 
@@ -98,14 +107,6 @@ var renderPins = function (pins, place) {
 
   place.appendChild(fragment);
 };
-
-var map = document.querySelector('.map');
-map.classList.remove('map--faded');
-
-var similarAds = getSimilarAds();
-renderPins(similarAds, mapOfPins);
-
-var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
 var createCard = function (info) {
   var card = cardTemplate.cloneNode(true);
@@ -151,8 +152,71 @@ var createCard = function (info) {
   return card;
 };
 
-var fragment = document.createDocumentFragment();
+var mainPinClickHandler = function () {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  for (var j = 0; j < fieldsets.length; j++) {
+    fieldsets[j].removeAttribute('disabled');
+  }
+  for (var i = 0; i < fieldsets.length; i++) {
+    fieldsets[i].removeAttribute('disabled');
+  }
+  adAddress.value = Math.floor(mainPin.offsetLeft + PIN_SIZE.width / 2) + ', ' + Math.floor(mainPin.offsetTop + PIN_SIZE.height);
+};
 
-fragment.appendChild(createCard(similarAds[0]));
+mainPin.addEventListener('mousedown', function (evt) {
+  if (evt.which === 1) {
+    mainPinClickHandler();
+  }
+});
 
-document.querySelector('.map').insertBefore(fragment, document.querySelector('.map__filters-container'));
+mainPin.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    mainPinClickHandler();
+  }
+});
+
+var selectChangeHandler = function () {
+  var selRoomsOption = Number(adRooms.value);
+  var selCapacity = Number(adCapacity.value);
+  if (selCapacity !== 0 && selCapacity > selRoomsOption) {
+    adCapacity.setCustomValidity('Количество гостей не должно превышать количество комнат.');
+    adCapacity.reportValidity();
+  } else if (selCapacity !== 0 && selRoomsOption === 100) {
+    adCapacity.setCustomValidity('Жилье со 100 комнатами не предназначено для гостей.');
+    adCapacity.reportValidity();
+  } else if (selCapacity === 0 && selRoomsOption !== 100) {
+    adCapacity.setCustomValidity('Пригласите гостей.');
+    adCapacity.reportValidity();
+  } else {
+    adCapacity.setCustomValidity('');
+  }
+};
+
+adCapacity.addEventListener('change', function () {
+  selectChangeHandler();
+});
+
+adRooms.addEventListener('change', function () {
+  selectChangeHandler();
+});
+
+// var selRoomsOption = adRooms.options[adRooms.options.selectedIndex].value;
+// var similarAds = getSimilarAds();
+// renderPins(similarAds, mapOfPins);
+
+// var fragment = document.createDocumentFragment();
+// fragment.appendChild(createCard(similarAds[0]));
+// document.querySelector('.map').insertBefore(fragment, document.querySelector('.map__filters-container'));
+var inactivePage = function () {
+  for (var i = 0; i < fieldsets.length; i++) {
+    fieldsets[i].setAttribute('disabled', '');
+  }
+  for (var j = 0; j < selects.length; j++) {
+    selects[j].setAttribute('disabled', '');
+  }
+
+  adAddress.value = Math.floor(mainPin.offsetLeft + mainPin.offsetWidth / 2) + ', ' + Math.floor(mainPin.offsetTop + mainPin.offsetHeight);
+};
+
+inactivePage();
