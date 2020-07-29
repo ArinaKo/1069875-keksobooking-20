@@ -93,7 +93,8 @@
     <!-- Форма объявления -->
     <section class="notice">
       <h2 class="notice__title">Ваше объявление</h2>
-      <form class="ad-form ad-form--disabled" method="post" enctype="multipart/form-data" action="https://javascript.pages.academy/keksobooking" autocomplete="off">
+      <form class="ad-form ad-form--disabled" method="post" enctype="multipart/form-data"
+        action="https://javascript.pages.academy/keksobooking" autocomplete="off">
         <fieldset class="ad-form-header">
           <legend class="ad-form-header__title">Ваша фотография (для карты)</legend>
           <div class="ad-form-header__upload">
@@ -101,7 +102,8 @@
               <img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">
             </div>
             <div class="ad-form__field">
-              <input type="file" id="avatar" name="avatar" accept="image/*" class="ad-form-header__input visually-hidden">
+              <input type="file" id="avatar" name="avatar" accept="image/*"
+                class="ad-form-header__input visually-hidden">
               <label class="ad-form-header__drop-zone" for="avatar">Загрузить<br>фото...</label>
             </div>
             <p class="ad-form-header__info">Заполните все обязательные поля, назначьте цену, загрузите фотографии.
@@ -111,11 +113,12 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" required minlength="30" maxlength="100" placeholder="Милая, уютная квартирка в центре Токио">
+          <input id="title" name="title" type="text" required minlength="30" maxlength="100"
+            placeholder="Милая, уютная квартирка в центре Токио">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес</label>
-          <input id="address" name="address" type="text">
+          <input id="address" name="address" type="text" readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -155,7 +158,7 @@
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="capacity">Количество мест</label>
           <select id="capacity" name="capacity">
-            <option value="3" >для 3 гостей</option>
+            <option value="3">для 3 гостей</option>
             <option value="2">для 2 гостей</option>
             <option value="1" selected>для 1 гостя</option>
             <option value="0">не для гостей</option>
@@ -275,6 +278,7 @@
   <script src="js/data.js"></script>
   <script src="js/card.js"></script>
   <script src="js/pin.js"></script>
+  <script src="js/move-pin.js"></script>
   <script src="js/form.js"></script>
   <script src="js/main.js"></script>
 

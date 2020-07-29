@@ -8,11 +8,6 @@
   var fieldsets = document.querySelectorAll('fieldset');
   var selects = document.querySelectorAll('select');
 
-  var PIN_SIZE = {
-    width: 50,
-    height: 70
-  };
-
   var mainPinKeydownHandler = function (evt) {
     window.util.isEnterEvent(evt, activePage);
   };
@@ -29,7 +24,7 @@
       selects[j].setAttribute('disabled', '');
     }
 
-    adAddress.value = Math.floor(mainPin.offsetLeft + mainPin.offsetWidth / 2) + ', ' + Math.floor(mainPin.offsetTop + mainPin.offsetHeight);
+    adAddress.value = Math.floor(mainPin.offsetLeft + mainPin.offsetWidth / 2) + ', ' + Math.floor(mainPin.offsetTop + mainPin.offsetHeight / 2);
 
     mainPin.addEventListener('mousedown', mainPinClickHandler);
     mainPin.addEventListener('keydown', mainPinKeydownHandler);
@@ -46,7 +41,8 @@
     for (var i = 0; i < selects.length; i++) {
       selects[i].removeAttribute('disabled');
     }
-    adAddress.value = Math.floor(mainPin.offsetLeft + PIN_SIZE.width / 2) + ', ' + Math.floor(mainPin.offsetTop + PIN_SIZE.height);
+
+    window.util.changeAddress();
 
     mainPin.removeEventListener('mousedown', mainPinClickHandler);
     mainPin.removeEventListener('keydown', mainPinKeydownHandler);
