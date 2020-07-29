@@ -32,7 +32,7 @@
     return pin;
   };
 
-  var renderPins = function (pins) {
+  var successHandler = function (pins) {
     var mapOfPins = document.querySelector('.map__pins');
     var fragment = document.createDocumentFragment();
 
@@ -40,11 +40,23 @@
       fragment.appendChild(createPin(pins[i]));
     }
 
-    // pins.forEach(function (pin) {
-    // fragment.appendChild(createPin(pin));
-    // });
-
     mapOfPins.appendChild(fragment);
+  };
+
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  var renderPins = function () {
+    window.load(successHandler, errorHandler);
   };
 
   window.pin = {
