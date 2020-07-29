@@ -61,6 +61,18 @@
     }
   };
 
+  var changeAddress = function () {
+    var addressInput = document.querySelector('#address');
+    var pin = document.querySelector('.map__pin--main');
+
+    var PIN_SIZE = {
+      width: 50,
+      height: 70
+    };
+
+    addressInput.value = Math.floor(pin.offsetLeft + PIN_SIZE.width / 2) + ', ' + Math.floor(pin.offsetTop + PIN_SIZE.height);
+  };
+
   window.util = {
     getRandomNumber: getRandomNumber,
     getRandomOption: getRandomOption,
@@ -69,6 +81,7 @@
     addTwoTextData: addTwoTextData,
     isEscEvent: isEscEvent,
     isEnterEvent: isEnterEvent,
-    isMainButtonEvent: isMainButtonEvent
+    isMainButtonEvent: isMainButtonEvent,
+    changeAddress: changeAddress
   };
 })();
