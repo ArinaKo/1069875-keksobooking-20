@@ -31,14 +31,14 @@
           }
         }
         if (count === false) {
-          features[i].setAttribute('hidden', true);
+          features[i].classList.add('visually-hidden');
         }
       }
     } else {
-      features.setAttribute('hidden', true);
+      features.classList.add('visually-hidden');
     }
 
-    if (info.offer.photos) {
+    if (info.offer.photos.length !== 0) {
       card.querySelector('.popup__photo').src = info.offer.photos[0];
       for (var z = 1; z < info.offer.photos.length; z++) {
         var img = cardTemplate.querySelector('.popup__photo').cloneNode(true);
@@ -46,13 +46,13 @@
         card.querySelector('.popup__photos').appendChild(img);
       }
     } else {
-      card.querySelector('.popup__photos').setAttribute('hidden', true);
+      card.querySelector('.popup__photos').classList.add('visually-hidden');
     }
 
     if (info.author.avatar) {
       card.querySelector('.popup__avatar').src = info.author.avatar;
     } else {
-      card.querySelector('.popup__avatar').setAttribute('hidden', true);
+      card.querySelector('.popup__avatar').classList.add('visually-hidden');
     }
 
     var fragment = document.createDocumentFragment();

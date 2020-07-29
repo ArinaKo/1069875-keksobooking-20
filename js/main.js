@@ -32,8 +32,8 @@
 
   var activePage = function () {
     map.classList.remove('map--faded');
-    var ads = window.data.getSimilarAds();
-    window.pin.renderPins(ads);
+    // var ads = window.data.getSimilarAds();
+    window.pin.renderPins();
     adForm.classList.remove('ad-form--disabled');
     for (var j = 0; j < fieldsets.length; j++) {
       fieldsets[j].removeAttribute('disabled');
